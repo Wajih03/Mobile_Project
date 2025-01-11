@@ -1,59 +1,88 @@
 package com.example.myapplication.api;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import com.example.myapplication.R;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
+import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.google.android.material.navigation.NavigationView;
+import com.example.myapplication.fragments.HomeFragment;   // Correct import
+import com.example.myapplication.fragments.SettingsFragment;  // Correct import
+import com.example.myapplication.fragments.ShareFragment;  // Correct import
+import com.example.myapplication.fragments.AboutFragment;  // Correct import
 
-import com.example.myapplication.DetailedActivity;
-import com.example.myapplication.ListAdapter;
-import com.example.myapplication.ListData;
-import com.example.myapplication.R;
-import com.example.myapplication.databinding.ActivityMainBinding;
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-import java.util.ArrayList;
-
-public class MainActivity extends AppCompatActivity {
-
-    ActivityMainBinding binding;
-    ListAdapter listAdapter;
-    ArrayList<ListData> dataArrayList = new ArrayList<>();
-    ListData listData;
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_main);
 
-        int[] imageList = {R.drawable.pasta, R.drawable.maggi, R.drawable.cake, R.drawable.pancake, R.drawable.pizza, R.drawable.burger, R.drawable.fries};
-        int[] ingredientList = {R.string.pastaIngredients, R.string.maggiIngredients,R.string.cakeIngredients,R.string.pancakeIngredients,R.string.pizzaIngredients, R.string.burgerIngredients, R.string.friesIngredients};
-        int[] descList = {R.string.pastaDesc, R.string.maggieDesc, R.string.cakeDesc,R.string.pancakeDesc,R.string.pizzaDesc, R.string.burgerDesc, R.string.friesDesc};
-        String[] nameList = {"Pasta", "Maggi", "Cake", "Pancake", "Pizza","Burgers", "Fries"};
-        String[] timeList = {"30 mins", "2 mins", "45 mins","10 mins", "60 mins", "45 mins", "30 mins"};
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        for (int i = 0; i < imageList.length; i++){
-            listData = new ListData(nameList[i], timeList[i], ingredientList[i], descList[i], imageList[i]);
-            dataArrayList.add(listData);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+            navigationView.setCheckedItem(R.id.nav_home);
         }
-        listAdapter = new ListAdapter(MainActivity.this, dataArrayList);
-        binding.listview.setAdapter(listAdapter);
-        binding.listview.setClickable(true);
+    }
 
-        binding.listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(MainActivity.this, DetailedActivity.class);
-                intent.putExtra("name", nameList[i]);
-                intent.putExtra("time", timeList[i]);
-                intent.putExtra("ingredients", ingredientList[i]);
-                intent.putExtra("desc", descList[i]);
-                intent.putExtra("image", imageList[i]);
-                startActivity(intent);
-            }
-        });
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.nav_home) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+        } else if (item.getItemId() == R.id.nav_settings) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
+        } else if (item.getItemId() == R.id.nav_share) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShareFragment()).commit();
+        } else if (item.getItemId() == R.id.nav_about) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AboutFragment()).commit();
+        } else if (item.getItemId() == R.id.nav_logout) {
+            // Clear user session data (e.g., SharedPreferences)
+            // Example of clearing preferences (uncomment and adjust as per your storage method):
+            // SharedPreferences preferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+            // preferences.edit().clear().apply();
+
+            // Show logout message
+            Toast.makeText(this, "Logged out successfully!", Toast.LENGTH_SHORT).show();
+
+            // Redirect to the LoginActivity
+            Intent intent = new Intent(MainActivity.this, Login_Activity.class); // Replace with your LoginActivity
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+            // Close the current activity (MainActivity)
+            finish();
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 }

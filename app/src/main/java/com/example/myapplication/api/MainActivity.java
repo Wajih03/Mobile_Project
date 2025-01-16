@@ -19,6 +19,7 @@ import com.example.myapplication.fragments.SettingsFragment;  // Correct import
 import com.example.myapplication.fragments.ShareFragment;  // Correct import
 import com.example.myapplication.fragments.AboutFragment;  // Correct import
 
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;

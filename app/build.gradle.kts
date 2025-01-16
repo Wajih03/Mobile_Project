@@ -50,6 +50,8 @@ dependencies {
     // Add Retrofit for HTTP communication
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
+    implementation ("com.android.volley:volley:1.2.1")
 
     // Firebase (if needed)
     implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
@@ -58,4 +60,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    ///image
+
+    implementation ("com.squareup.picasso:picasso:2.71828") // For image loading
+
 }

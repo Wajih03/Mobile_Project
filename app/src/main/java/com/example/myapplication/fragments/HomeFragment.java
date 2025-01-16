@@ -2,6 +2,7 @@ package com.example.myapplication.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +13,24 @@ import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.DetailedActivity;
 import com.example.myapplication.ListAdapter;
-import com.example.myapplication.ListData;
 import com.example.myapplication.R;
+import com.example.myapplication.api.ApiService;
+import com.example.myapplication.api.Recipe;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeFragment extends Fragment {
 
-    ListAdapter listAdapter;
-    ArrayList<ListData> dataArrayList = new ArrayList<>();
-    ListData listData;
+    private static final String BASE_URL = "http://192.168.90.233:5000/";
+    private ListAdapter listAdapter;
+    private ArrayList<Recipe> dataArrayList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,37 +41,53 @@ public class HomeFragment extends Fragment {
         // Initialize ListView
         ListView listView = view.findViewById(R.id.listview); // Make sure your fragment_home.xml has a ListView with this ID
 
-        // Sample data
-        int[] imageList = {R.drawable.pasta, R.drawable.maggi, R.drawable.cake, R.drawable.pancake, R.drawable.pizza, R.drawable.burger, R.drawable.fries};
-        int[] ingredientList = {R.string.pastaIngredients, R.string.maggiIngredients, R.string.cakeIngredients, R.string.pancakeIngredients, R.string.pizzaIngredients, R.string.burgerIngredients, R.string.friesIngredients};
-        int[] descList = {R.string.pastaDesc, R.string.maggieDesc, R.string.cakeDesc, R.string.pancakeDesc, R.string.pizzaDesc, R.string.burgerDesc, R.string.friesDesc};
-        String[] nameList = {"Pasta", "Maggi", "Cake", "Pancake", "Pizza", "Burgers", "Fries"};
-        String[] timeList = {"30 mins", "2 mins", "45 mins", "10 mins", "60 mins", "45 mins", "30 mins"};
+        // Create Retrofit instance
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-        // Populate dataArrayList
-        for (int i = 0; i < imageList.length; i++) {
-            listData = new ListData(nameList[i], timeList[i], ingredientList[i], descList[i], imageList[i]);
-            dataArrayList.add(listData);
-        }
+        // Create ApiService instance
+        ApiService apiService = retrofit.create(ApiService.class);
 
-        // Set up the adapter
-        listAdapter = new ListAdapter(getActivity(), dataArrayList);
-        listView.setAdapter(listAdapter);
-        listView.setClickable(true);
-
-        // Set item click listener
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        // Make network request to get recipes
+        apiService.getRecipes().enqueue(new Callback<List<Recipe>>() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getActivity(), DetailedActivity.class);
-                intent.putExtra("name", nameList[i]);
-                intent.putExtra("time", timeList[i]);
-                intent.putExtra("ingredients", ingredientList[i]);
-                intent.putExtra("desc", descList[i]);
-                intent.putExtra("image", imageList[i]);
-                startActivity(intent);
+            public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Recipe> recipes = response.body();
+                    if (recipes.isEmpty()) {
+                        Log.e("HomeFragment", "No recipes found!");
+                    } else {
+                        dataArrayList.clear();
+                        dataArrayList.addAll(recipes);
+                        listAdapter = new ListAdapter(getActivity(), dataArrayList);
+                        listView.setAdapter(listAdapter);
+                    }
+                } else {
+                    Log.e("HomeFragment", "Error: " + response.code() + " - " + response.message());
+                }
+            }
+
+
+            @Override
+            public void onFailure(Call<List<Recipe>> call, Throwable t) {
+                // Handle failure case
             }
         });
+
+        // Set item click listener to navigate to DetailedActivity
+        listView.setOnItemClickListener((adapterView, view1, i, l) -> {
+            Recipe clickedRecipe = dataArrayList.get(i);
+            Intent intent = new Intent(getActivity(), DetailedActivity.class);
+            intent.putExtra("name", clickedRecipe.getName());
+            intent.putExtra("time", clickedRecipe.getTime());
+            intent.putExtra("ingredients", clickedRecipe.getIngredients());  // Update this with actual ingredient data
+            intent.putExtra("description", clickedRecipe.getDescription());
+            intent.putExtra("image", clickedRecipe.getImage()); // Pass image URL here
+            startActivity(intent);
+        });
+
 
         return view;
     }

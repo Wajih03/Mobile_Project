@@ -1,5 +1,7 @@
 package com.example.myapplication.api;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -7,7 +9,21 @@ public class RetrofitClient {
 
     private static RetrofitClient instance;
     private ApiService apiService;
-    private static final String BASE_URL = "http://192.168.0.15:5000/"; // Replace with your actual IP address
+    private static final String BASE_URL = "http://192.168.90.233:5000/"; // Replace with your actual IP address
+
+
+    OkHttpClient okHttpClient = new OkHttpClient.Builder()
+            .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            .build();
+
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+
+
+
 
     private RetrofitClient() {
         Retrofit retrofit = new Retrofit.Builder()
@@ -17,7 +33,6 @@ public class RetrofitClient {
 
         apiService = retrofit.create(ApiService.class);
     }
-
     public static RetrofitClient getInstance() {
         if (instance == null) {
             instance = new RetrofitClient();
@@ -28,4 +43,5 @@ public class RetrofitClient {
     public ApiService getApiService() {
         return apiService;
     }
+
 }

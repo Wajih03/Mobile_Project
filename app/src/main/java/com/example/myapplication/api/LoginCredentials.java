@@ -2,20 +2,20 @@ package com.example.myapplication.api;
 
 public class LoginCredentials {
 
-    private String username;
+    private String email; // Change to email
     private String password;
 
-    public LoginCredentials(String username, String password) {
-        this.username = username;
+    public LoginCredentials(String email, String password) {
+        this.email = email; // Change to email
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() { // Change to email
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) { // Change to email
+        this.email = email;
     }
 
     public String getPassword() {

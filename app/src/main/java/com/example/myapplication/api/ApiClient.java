@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-    private static final String BASE_URL = "http://192.168.0.15:5000/"; // For Emulator
+    private static final String BASE_URL = "http://192.168.90.233:5000/"; // For Emulator
     private static Retrofit retrofit;
 
     public static Retrofit getRetrofitInstance() {

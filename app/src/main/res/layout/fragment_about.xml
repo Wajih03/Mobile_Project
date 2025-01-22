@@ -3,20 +3,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:gravity="center">
 
     <TextView
-        android:id="@+id/about_text"
+        android:id="@+id/about_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="About This App"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
 
     <TextView
+        android:id="@+id/about_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="This is a sample app created to demonstrate how fragments work in Android. It includes navigation and fragment replacement functionality."
-        android:layout_marginTop="16dp"
-        android:textSize="16sp" />
+        android:text="This app helps workers in Tunisair to fix their own problems related to materials like printers, keyboards, network cables, and more. The app provides solutions and guides to help resolve common technical issues, empowering users to troubleshoot and solve problems efficiently."
+        android:textSize="16sp"
+        android:textAlignment="center"/>
+    <TextView
+        android:id="@+id/about_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="App Version: 1.0.0"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/about_developer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Developer: Your Name"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp"/>
 </LinearLayout>

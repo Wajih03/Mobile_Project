@@ -8,8 +8,6 @@
     android:orientation="vertical"
     tools:context=".DetailedActivity">
 
-    <!-- Existing Views -->
-
     <!-- Recipe Name -->
     <TextView
         android:layout_width="wrap_content"
@@ -24,86 +22,84 @@
 
     <!-- CardView with Image -->
     <androidx.cardview.widget.CardView
-        android:layout_width="380dp"
-        android:layout_height="200dp"
-        android:id="@+id/cardImage"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="8dp">
+        android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:id="@+id/cardImage"
+    android:layout_marginTop="10dp"
+    android:layout_gravity="center"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="8dp">
 
-        <ImageView
-            android:id="@+id/detailImage"
-            android:layout_width="380dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/maggi" />
+    <ImageView
+        android:id="@+id/detailImage"
+        android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:layout_marginTop="10dp"
+    android:scaleType="centerCrop" />
 
-    </androidx.cardview.widget.CardView>
+</androidx.cardview.widget.CardView>
 
     <!-- Duration Label and Time -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Duration:"
-        android:textColor="@color/lavender"
-        android:textStyle="bold"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="30dp"
-        android:textSize="18sp"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="time"
-        android:layout_marginStart="10dp"
-        android:textSize="16sp"
-        android:id="@+id/detailTime"/>
+<TextView
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Duration:"
+android:textColor="@color/lavender"
+android:textStyle="bold"
+android:layout_marginStart="10dp"
+android:layout_marginTop="30dp"
+android:textSize="18sp"/>
+<TextView
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="time"
+android:layout_marginStart="10dp"
+android:textSize="16sp"
+android:id="@+id/detailTime"/>
 
     <!-- Ingredients Label and List -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ingredients:"
-        android:textColor="@color/lavender"
-        android:textStyle="bold"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:textSize="18sp"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:layout_marginStart="10dp"
-        android:textSize="16sp"
-        android:id="@+id/detailIngredients"/>
+<TextView
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Steps:"
+android:textColor="@color/lavender"
+android:textStyle="bold"
+android:layout_marginStart="10dp"
+android:layout_marginTop="20dp"
+android:textSize="18sp"/>
+<TextView
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_marginStart="10dp"
+android:textSize="16sp"
+android:id="@+id/detailIngredients"/>
 
     <!-- Steps Label and Description -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Steps:"
-        android:textColor="@color/lavender"
-        android:textStyle="bold"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:textSize="18sp"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/material_motion_easing_accelerated"
-        android:layout_marginStart="10dp"
-        android:textSize="16sp"
-        android:id="@+id/detailDesc"/>
+<TextView
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Description:"
+android:textColor="@color/lavender"
+android:textStyle="bold"
+android:layout_marginStart="10dp"
+android:layout_marginTop="20dp"
+android:textSize="18sp"/>
+<TextView
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="@string/material_motion_easing_accelerated"
+android:layout_marginStart="10dp"
+android:textSize="16sp"
+android:id="@+id/detailDesc"/>
 
     <!-- Back Button -->
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Back"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="start"/>
+<Button
+android:id="@+id/backButton"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Back"
+android:layout_marginTop="16dp"
+android:layout_gravity="start"/>
 
-</LinearLayout>
+    </LinearLayout>

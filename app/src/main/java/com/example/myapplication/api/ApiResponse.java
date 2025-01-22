@@ -6,7 +6,7 @@ public class ApiResponse {
     private String name;
     private String email;
     private String username;
-   private String password;
+    private String password;
     // Getters and Setters
     public String getMessage() {
         return message;

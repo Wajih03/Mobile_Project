@@ -28,7 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeFragment extends Fragment {
 
-    private static final String BASE_URL = "http://192.168.90.233:5000/";
+    private static final String BASE_URL = "http://192.168.1.44:5000/";
     private ListAdapter listAdapter;
     private ArrayList<Recipe> dataArrayList = new ArrayList<>();
 

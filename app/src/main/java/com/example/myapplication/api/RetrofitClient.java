@@ -9,7 +9,7 @@ public class RetrofitClient {
 
     private static RetrofitClient instance;
     private ApiService apiService;
-    private static final String BASE_URL = "http://192.168.90.233:5000/"; // Replace with your actual IP address
+    private static final String BASE_URL = "http://192.168.1.44:5000/"; // Replace with your actual IP address
 
 
     OkHttpClient okHttpClient = new OkHttpClient.Builder()

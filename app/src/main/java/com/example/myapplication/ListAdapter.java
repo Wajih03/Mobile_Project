@@ -35,13 +35,11 @@ public class ListAdapter extends ArrayAdapter<Recipe> {
 
         ImageView listImage = view.findViewById(R.id.listImage);
         TextView listName = view.findViewById(R.id.listName);
-        TextView listTime = view.findViewById(R.id.listTime);
 
         // Load image using Picasso (assuming the image is a URL)
         Picasso.get().load(recipe.getImage()).into(listImage);
 
         listName.setText(recipe.getName());
-        listTime.setText(recipe.getTime());
 
         return view;
     }

@@ -1,105 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".DetailedActivity">
 
-    <!-- Recipe Name -->
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/detailName"
-        android:layout_marginTop="14dp"
-        android:text="Recipe Name"
-        android:textSize="24sp"
-        android:textColor="@color/lavender"
-        android:textStyle="bold"
-        android:layout_gravity="center"/>
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <!-- CardView with Image -->
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-    android:layout_height="300dp"
-    android:id="@+id/cardImage"
-    android:layout_marginTop="10dp"
-    android:layout_gravity="center"
-    app:cardCornerRadius="20dp"
-    app:cardElevation="8dp">
+        <!-- Recipe Name -->
+        <TextView
+            android:id="@+id/detailName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_gravity="center"
+            android:text="Recipe Name"
+            android:textSize="24sp"
+            android:textColor="@color/lavender"
+            android:textStyle="bold" />
 
-    <ImageView
-        android:id="@+id/detailImage"
-        android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:layout_marginTop="10dp"
-    android:scaleType="centerCrop" />
+        <!-- CardView with Image -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardImage"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp">
 
-</androidx.cardview.widget.CardView>
+            <ImageView
+                android:id="@+id/detailImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop" />
 
-    <!-- Duration Label and Time -->
-<TextView
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:text="Duration:"
-android:textColor="@color/lavender"
-android:textStyle="bold"
-android:layout_marginStart="10dp"
-android:layout_marginTop="30dp"
-android:textSize="18sp"/>
-<TextView
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:text="time"
-android:layout_marginStart="10dp"
-android:textSize="16sp"
-android:id="@+id/detailTime"/>
+        </androidx.cardview.widget.CardView>
 
-    <!-- Ingredients Label and List -->
-<TextView
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:text="Steps:"
-android:textColor="@color/lavender"
-android:textStyle="bold"
-android:layout_marginStart="10dp"
-android:layout_marginTop="20dp"
-android:textSize="18sp"/>
-<TextView
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:layout_marginStart="10dp"
-android:textSize="16sp"
-android:id="@+id/detailIngredients"/>
+        <!-- Duration Label and Time -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:text="Duration:"
+            android:textColor="@color/lavender"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-    <!-- Steps Label and Description -->
-<TextView
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:text="Description:"
-android:textColor="@color/lavender"
-android:textStyle="bold"
-android:layout_marginStart="10dp"
-android:layout_marginTop="20dp"
-android:textSize="18sp"/>
-<TextView
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:text="@string/material_motion_easing_accelerated"
-android:layout_marginStart="10dp"
-android:textSize="16sp"
-android:id="@+id/detailDesc"/>
+        <TextView
+            android:id="@+id/detailTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="time"
+            android:textSize="16sp" />
 
-    <!-- Back Button -->
-<Button
-android:id="@+id/backButton"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:text="Back"
-android:layout_marginTop="16dp"
-android:layout_gravity="start"/>
+        <!-- Ingredients Label and List -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:text="Steps:"
+            android:textColor="@color/lavender"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/detailIngredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textSize="16sp" />
+
+        <!-- Steps Label and Description -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:text="Description:"
+            android:textColor="@color/lavender"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/detailDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/material_motion_easing_accelerated"
+            android:textSize="16sp" />
+
+        <!-- Back Button -->
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="start"
+            android:text="Back" />
 
     </LinearLayout>
+</ScrollView>
